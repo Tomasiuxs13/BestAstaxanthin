@@ -66,10 +66,16 @@ BestAstaxanthin/
 ### 1. Add Product Images
 
 Place your product images in the `assets/images/products/` folder:
-- `product-1.jpg` - Sports Research Astaxanthin
-- `product-2.jpg` - Pure Encapsulations Astaxanthin
-- `product-3.jpg` - NOW Foods Astaxanthin
-- Continue for products 4-10
+- `test-sports-research.jpg` - Sports Research Triple Strength Astaxanthin
+- `Lifeextention astaxanthin.jpg` - Life Extension Astaxanthin
+- `Nutrex-hawaii.jpg` - NUTREX HAWAII BioAstin Supreme Hawaiian Astaxanthin
+- `product-4.jpg` - Microingredients Astaxanthin
+- `product-5.jpg` - Double Wood Astaxanthin
+- `product-6.jpg` - Nutricost Astaxanthin
+- `product-7.jpg` - Vivonu Astaxanthin 12mg
+- `product-8.jpg` - NOW Foods Astaxanthin
+- `product-9.jpg` - NatureBell Astaxanthin
+- `product-10.jpg` - BulkSupplements.com Astaxanthin
 
 **Image Specifications:**
 - Format: WebP (preferred) or JPG
@@ -86,10 +92,22 @@ Replace placeholder Amazon links in `index.html`:
 <a href="https://amazon.com/example" class="btn btn-primary">
 ```
 
-Replace with your actual Amazon Associates or affiliate links:
+Replace with your actual Amazon Associates affiliate links:
 ```html
-<a href="https://amazon.com/dp/YOUR-AFFILIATE-ID?tag=YOUR-ASSOCIATE-TAG" class="btn btn-primary">
+<a href="https://amazon.com/dp/PRODUCT-ASIN?tag=YOUR-ASSOCIATE-TAG" class="btn btn-primary">
 ```
+
+**Top 10 Affiliate Links:**
+1. **Sports Research**: `https://www.amazon.com/Strength-Astaxanthin-Organic-Coconut-Absorption/dp/B07V574YYY?tag=YOUR-TAG`
+2. **Life Extension**: `https://www.lifeextension.com/search#q=astaxanthin&t=coveo4A2453FD?tag=YOUR-TAG`
+3. **NUTREX HAWAII BioAstin**: `https://www.amazon.com/BioAstin-Hawaiian-Astaxanthin-Immunity-Supports/dp/B097F68J43?tag=YOUR-TAG`
+4. **Microingredients**: `https://www.amazon.com/gp/product/B08MWZQ4S6?tag=YOUR-TAG`
+5. **Double Wood**: `https://www.amazon.com/Astaxanthin-12mg-Max-Strength-AstaReal/dp/B09ZBL2LP2?tag=YOUR-TAG`
+6. **Nutricost**: `https://www.amazon.com/Nutricost-Astaxanthin-12mg-120-Softgels/dp/B078Z16G8W?tag=YOUR-TAG`
+7. **Vivonu**: `https://www.amazon.com/Astaxanthin-Haematococcus-Pluvialis-Antioxidant-Supplements/dp/B0FJ2392VB?tag=YOUR-TAG`
+8. **NOW Foods**: `https://www.amazon.com/NOW-Astaxanthin-4mg-60-Softgels/dp/B0013OVXA8?tag=YOUR-TAG`
+9. **NatureBell**: `https://www.amazon.com/Strength-Astaxanthin-Supplements-Softgels-Strongly/dp/B0923B4XLX?tag=YOUR-TAG`
+10. **BulkSupplements.com**: `https://www.amazon.com/BULKSUPPLEMENTS-COM-Astaxanthin-12mg-Softgels-Antioxidants/dp/B0B9HNPB88?tag=YOUR-TAG`
 
 ### 3. Customize Content
 

@@ -42,34 +42,60 @@
     // 2. FAQ Accordion
     // ===================================
 
-    const faqToggles = document.querySelectorAll('.faq-toggle');
+    const faqItems = document.querySelectorAll('.faq-item');
 
-    faqToggles.forEach(toggle => {
-        toggle.addEventListener('click', function() {
-            const faqItem = this.closest('.faq-item');
-            const faqAnswer = faqItem.querySelector('.faq-answer');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    if (faqItems.length > 0) {
+        // console.log('FAQ items found:', faqItems.length);
 
-            // Close all other FAQ items
-            faqToggles.forEach(otherToggle => {
-                if (otherToggle !== toggle) {
-                    otherToggle.setAttribute('aria-expanded', 'false');
-                    otherToggle.closest('.faq-item').classList.remove('active');
-                }
-            });
+        faqItems.forEach(function(item) {
+            const toggle = item.querySelector('.faq-toggle');
+            const answer = item.querySelector('.faq-answer');
 
-            // Toggle current item
-            this.setAttribute('aria-expanded', !isExpanded);
-            faqItem.classList.toggle('active');
+            // Initialize answer as closed
+            if (answer) {
+                answer.style.maxHeight = '0';
+                answer.style.overflow = 'hidden';
+                answer.style.transition = 'max-height 0.3s ease';
+            }
 
-            // Set max-height for smooth animation
-            if (!isExpanded) {
-                faqAnswer.style.maxHeight = faqAnswer.scrollHeight + 'px';
-            } else {
-                faqAnswer.style.maxHeight = '0';
+            if (toggle && answer) {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // console.log('FAQ button clicked');
+
+                    const isOpen = item.classList.contains('active');
+
+                    // Close all other items
+                    faqItems.forEach(function(otherItem) {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                            const otherToggle = otherItem.querySelector('.faq-toggle');
+                            const otherAnswer = otherItem.querySelector('.faq-answer');
+                            if (otherToggle) otherToggle.setAttribute('aria-expanded', 'false');
+                            if (otherAnswer) otherAnswer.style.maxHeight = '0';
+                        }
+                    });
+
+                    // Toggle current item
+                    if (isOpen) {
+                        // Close it
+                        item.classList.remove('active');
+                        toggle.setAttribute('aria-expanded', 'false');
+                        answer.style.maxHeight = '0';
+                        // console.log('Closing FAQ');
+                    } else {
+                        // Open it
+                        item.classList.add('active');
+                        toggle.setAttribute('aria-expanded', 'true');
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                        // console.log('Opening FAQ, height:', answer.scrollHeight);
+                    }
+                });
             }
         });
-    });
+    } else {
+        // console.log('No FAQ items found');
+    }
 
     // ===================================
     // 3. Smooth Scroll for Anchor Links
@@ -113,27 +139,96 @@
     // 4. Sticky Mobile CTA Show/Hide
     // ===================================
 
-    const stickyCTA = document.querySelector('.sticky-mobile-cta');
-    const heroSection = document.querySelector('.hero');
+    const stickyMobileCTA = document.querySelector('.sticky-mobile-cta');
+    const stickyDesktopCTA = document.querySelector('.sticky-desktop-cta');
+    const heroSection = document.querySelector('.hero-compact');
 
-    if (stickyCTA && heroSection) {
+    if ((stickyMobileCTA || stickyDesktopCTA) && heroSection) {
         window.addEventListener('scroll', function() {
             const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
             const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
             if (scrollPosition > heroBottom) {
-                stickyCTA.style.transform = 'translateY(0)';
-                stickyCTA.style.opacity = '1';
+                if (stickyMobileCTA) {
+                    stickyMobileCTA.style.transform = 'translateY(0)';
+                    stickyMobileCTA.style.opacity = '1';
+                }
+                if (stickyDesktopCTA) {
+                    stickyDesktopCTA.style.transform = 'translateX(0) scale(1)';
+                    stickyDesktopCTA.style.opacity = '1';
+                }
             } else {
-                stickyCTA.style.transform = 'translateY(100%)';
-                stickyCTA.style.opacity = '0';
+                if (stickyMobileCTA) {
+                    stickyMobileCTA.style.transform = 'translateY(100%)';
+                    stickyMobileCTA.style.opacity = '0';
+                }
+                if (stickyDesktopCTA) {
+                    stickyDesktopCTA.style.transform = 'translateX(-100%) scale(0.8)';
+                    stickyDesktopCTA.style.opacity = '0';
+                }
             }
         });
+    }
 
-        // Initialize with hidden state
-        stickyCTA.style.transition = 'all 0.3s ease';
-        stickyCTA.style.transform = 'translateY(100%)';
-        stickyCTA.style.opacity = '0';
+    // Scrolling Side Banner functionality - Scroll within content section boundaries
+    const sideBanner = document.querySelector('.scrolling-side-banner');
+    const contentSection = document.querySelector('.content-section');
+    const footer = document.querySelector('.footer');
+
+    if (sideBanner && contentSection && footer) {
+        function updateBannerPosition() {
+            const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+            const contentTop = contentSection.offsetTop;
+            const contentBottom = contentSection.offsetTop + contentSection.offsetHeight;
+            const footerTop = footer.offsetTop;
+            const windowHeight = window.innerHeight;
+            const bannerHeight = sideBanner.offsetHeight;
+
+            // Calculate banner position relative to content section
+            let bannerTop = scrollPosition - contentTop + (windowHeight / 2) - (bannerHeight / 2);
+
+            // Constrain banner within content section boundaries
+            if (scrollPosition < contentTop) {
+                // Before content section - hide banner
+                sideBanner.style.opacity = '0';
+                sideBanner.style.visibility = 'hidden';
+            } else if (scrollPosition + windowHeight > footerTop) {
+                // Near footer - position at bottom of content section
+                const maxTop = contentBottom - contentTop - bannerHeight - 20;
+                bannerTop = Math.min(bannerTop, maxTop);
+                sideBanner.style.top = Math.max(20, bannerTop) + 'px';
+                sideBanner.style.opacity = '1';
+                sideBanner.style.visibility = 'visible';
+            } else {
+                // Within content section - follow scroll but stay within bounds
+                const minTop = 20;
+                const maxTop = contentBottom - contentTop - bannerHeight - 20;
+                bannerTop = Math.max(minTop, Math.min(bannerTop, maxTop));
+                sideBanner.style.top = bannerTop + 'px';
+                sideBanner.style.opacity = '1';
+                sideBanner.style.visibility = 'visible';
+            }
+        }
+
+        // Update banner position on scroll
+        window.addEventListener('scroll', updateBannerPosition);
+        window.addEventListener('resize', updateBannerPosition);
+
+        // Initial position
+        updateBannerPosition();
+    }
+
+    // Initialize sticky CTAs with hidden state
+    if (stickyMobileCTA) {
+        stickyMobileCTA.style.transition = 'all 0.3s ease';
+        stickyMobileCTA.style.transform = 'translateY(100%)';
+        stickyMobileCTA.style.opacity = '0';
+    }
+
+    if (stickyDesktopCTA) {
+        stickyDesktopCTA.style.transition = 'all 0.3s ease';
+        stickyDesktopCTA.style.transform = 'translateX(-100%) scale(0.8)';
+        stickyDesktopCTA.style.opacity = '0';
     }
 
     // ===================================
@@ -184,11 +279,11 @@
             }
 
             // Track with any other analytics platform
-            console.log('Affiliate link clicked:', {
-                product: productName,
-                position: position,
-                url: this.href
-            });
+            // console.log('Affiliate link clicked:', {
+            //     product: productName,
+            //     position: position,
+            //     url: this.href
+            // });
         });
     });
 
@@ -247,8 +342,8 @@
     backToTop.setAttribute('aria-label', 'Back to top');
     backToTop.style.cssText = `
         position: fixed;
-        bottom: 80px;
-        right: 20px;
+        bottom: 20px;
+        right: 90px;
         width: 50px;
         height: 50px;
         background-color: var(--color-primary-red, #FF6B6B);
@@ -260,7 +355,7 @@
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        z-index: 80;
+        z-index: 79;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     `;
 
@@ -416,7 +511,7 @@
         const lcpObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
             const lastEntry = entries[entries.length - 1];
-            console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
+            // console.log('LCP:', lastEntry.renderTime || lastEntry.loadTime);
         });
         lcpObserver.observe({ entryTypes: ['largest-contentful-paint'] });
 
@@ -424,7 +519,7 @@
         const fidObserver = new PerformanceObserver((list) => {
             const entries = list.getEntries();
             entries.forEach(entry => {
-                console.log('FID:', entry.processingStart - entry.startTime);
+                // console.log('FID:', entry.processingStart - entry.startTime);
             });
         });
         fidObserver.observe({ entryTypes: ['first-input'] });
@@ -437,7 +532,7 @@
                     clsScore += entry.value;
                 }
             }
-            console.log('CLS:', clsScore);
+            // console.log('CLS:', clsScore);
         });
         clsObserver.observe({ entryTypes: ['layout-shift'] });
     }
@@ -447,7 +542,7 @@
     // ===================================
 
     window.addEventListener('load', function() {
-        console.log('Best Astaxanthin - Page fully loaded');
+        // console.log('Best Astaxanthin - Page fully loaded');
 
         // Remove any loading states
         document.body.classList.add('loaded');
@@ -456,14 +551,39 @@
         if (window.performance && window.performance.timing) {
             const perfData = window.performance.timing;
             const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
-            console.log('Page load time:', pageLoadTime + 'ms');
+            // console.log('Page load time:', pageLoadTime + 'ms');
         }
     });
 
     // ===================================
-    // 14. Initialize Everything
+    // 14. Product Card Toggle Functionality
     // ===================================
 
-    console.log('Best Astaxanthin - Scripts initialized');
+    const expandButtons = document.querySelectorAll('.expand-btn, .toggle-details');
+
+    expandButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productCard = this.closest('.product-card-affiliate, .product-card');
+            const detailsSection = productCard.querySelector('.product-details-expanded');
+
+            if (detailsSection.style.display === 'none' || !detailsSection.style.display) {
+                // Show details
+                detailsSection.style.display = 'block';
+                this.textContent = this.classList.contains('expand-btn') ? 'Details ▲' : 'Hide full review';
+                this.classList.add('active');
+            } else {
+                // Hide details
+                detailsSection.style.display = 'none';
+                this.textContent = this.classList.contains('expand-btn') ? 'Details ▼' : 'Show full review';
+                this.classList.remove('active');
+            }
+        });
+    });
+
+    // ===================================
+    // 15. Initialize Everything
+    // ===================================
+
+    // console.log('Best Astaxanthin - Scripts initialized');
 
 })();
