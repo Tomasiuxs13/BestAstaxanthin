@@ -5430,6 +5430,8 @@ section {
     border-radius: var(--radius-md);
     padding: var(--spacing-xl);
     margin: var(--spacing-2xl) 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .author-box-header {
