@@ -74,15 +74,39 @@
         </nav>
     </header>
 
-<main>
+<main id="main-content" role="main">
+
+        <!-- Breadcrumbs -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <nav aria-label="Breadcrumb">
+                    <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="/blog"><span itemprop="name">Blog</span></a>
+                            <meta itemprop="position" content="2" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <span itemprop="name">Exercise Recovery</span>
+                            <meta itemprop="position" content="3" />
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Article Header -->
         <section class="page-header">
             <div class="container narrow">
                 <span class="blog-category athletic">Athletic Performance</span>
                 <h1>Can Astaxanthin Help with Exercise Recovery?</h1>
                 <p class="page-subtitle">Clinical evidence for muscle recovery, endurance, and athletic performance</p>
                 <div class="review-meta">
-                    <span><i class="far fa-calendar-check"></i> January 15, 2025</span>
-                    <span><i class="far fa-clock"></i> 9 min read</span>
+                    <span class="last-updated"><i class="far fa-calendar-check"></i> January 15, 2025</span>
+                    <span class="reading-time"><i class="far fa-clock"></i> 9 min read</span>
                 </div>
             </div>
         </section>
@@ -134,7 +158,7 @@
                     <p class="author-box-bio">
                         Dr. Sarah Mitchell is a leading health and nutrition expert with over 15 years of experience in nutritional biochemistry and antioxidant research. She specializes in translating complex scientific research into practical, evidence-based guidance for supplement users.
                     </p>
-                    <a href="author.html" class="author-box-link">
+                    <a href="../author.html" class="author-box-link">
                         View Full Profile <i class="fas fa-arrow-right"></i>
                     </a>
                 </aside>

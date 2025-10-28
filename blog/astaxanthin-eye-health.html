@@ -74,15 +74,39 @@
         </nav>
     </header>
 
-<main>
+<main id="main-content" role="main">
+
+        <!-- Breadcrumbs -->
+        <section class="breadcrumbs">
+            <div class="container">
+                <nav aria-label="Breadcrumb">
+                    <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+                            <meta itemprop="position" content="1" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <a itemprop="item" href="/blog"><span itemprop="name">Blog</span></a>
+                            <meta itemprop="position" content="2" />
+                        </li>
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            <span itemprop="name">Eye Health</span>
+                            <meta itemprop="position" content="3" />
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </section>
+
+        <!-- Article Header -->
         <section class="page-header">
             <div class="container narrow">
                 <span class="blog-category eye-health">Eye Health</span>
                 <h1>Astaxanthin and Eye Health: What the Research Says</h1>
                 <p class="page-subtitle">Evidence for eye strain relief, macular health, and vision protection</p>
                 <div class="review-meta">
-                    <span><i class="far fa-calendar-check"></i> January 15, 2025</span>
-                    <span><i class="far fa-clock"></i> 10 min read</span>
+                    <span class="last-updated"><i class="far fa-calendar-check"></i> January 15, 2025</span>
+                    <span class="reading-time"><i class="far fa-clock"></i> 10 min read</span>
                 </div>
             </div>
         </section>
