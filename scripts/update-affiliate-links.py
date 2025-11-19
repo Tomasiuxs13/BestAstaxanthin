@@ -6,9 +6,9 @@ import re
 
 # Mapping of old links to new links
 AFFILIATE_LINKS = {
-    # Sports Research
-    "https://amzn.to/4hnuA32": "https://amzn.to/43Dtomv",
-    "amzn.to/4hnuA32": "amzn.to/43Dtomv",
+    # Sports Research - revert to original link
+    "https://amzn.to/43Dtomv": "https://amzn.to/4hnuA32",
+    "amzn.to/43Dtomv": "amzn.to/4hnuA32",
     
     # Life Extension
     "https://amzn.to/496JLva": "https://amzn.to/3X5WQhb",
