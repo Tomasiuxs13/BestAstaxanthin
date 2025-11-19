@@ -4,8 +4,8 @@
 import re
 from pathlib import Path
 
-OLD_CONTENT = "567d86b3-91fe-4468-a318-f2cdef453c5e"
-NEW_CONTENT = "773efce8-233d-40cf-a46d-3b7205b315e2"
+OLD_CONTENT = "773efce8-233d-40cf-a46d-3b7205b315e2"
+NEW_CONTENT = "567d86b3-91fe-4468-a318-f2cdef453c5e"
 
 def update_verification_meta(filepath):
     """Update fo-verify meta tag content in HTML file."""
