@@ -7,8 +7,8 @@ import re
 # Mapping of old links to new links
 AFFILIATE_LINKS = {
     # Sports Research
-    "https://amzn.to/4hnuA32": "https://amzn.to/43Dtomv",
-    "amzn.to/4hnuA32": "amzn.to/43Dtomv",
+    "https://amzn.to/4hnuA32": "https://click.linksynergy.com/link?id=BCyqzXXusRs&offerid=1663588.534126176833866128105820&type=2&murl=https%3a%2f%2fstore.sportsresearch.com%2fproducts%2fastaxanthin-12mg-60-veggie-softgels%3fvariant%3d52872601207155",
+    "amzn.to/4hnuA32": "https://click.linksynergy.com/link?id=BCyqzXXusRs&offerid=1663588.534126176833866128105820&type=2&murl=https%3a%2f%2fstore.sportsresearch.com%2fproducts%2fastaxanthin-12mg-60-veggie-softgels%3fvariant%3d52872601207155",
     
     # Life Extension
     "https://amzn.to/496JLva": "https://amzn.to/3X5WQhb",
